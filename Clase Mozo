@@ -1,0 +1,14 @@
+
+public class Mozo {
+	private int dni;
+	private String nombre;
+	private float sueldoBasico;
+	
+	public Mozo(int valor1, String str1, float valor2)
+	{
+		dni = valor1;
+		nombre = str1;
+		sueldoBasico = valor2;
+	}
+	
+}
