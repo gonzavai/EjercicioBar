@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+
+public class Ticket {
+	
+	private int nroTicket;
+	private Fecha fecha;
+	private int nroMesa;
+	private ArrayList<Consumo> consumos;
+	private float total;
+	private Mozo mozo;
+	
+	public Ticket(int valor1, int valor2, Mozo m)
+	{
+		nroTicket = valor1;
+		fecha = fecha.hoy();
+		nroMesa = valor2;
+		consumos = new ArrayList<Consumo>();
+		total = 0;
+		mozo = m;
+	}
+	
+	public boolean estaAbierto()
+	{
+		return total == 0;
+	}
+	
+	
+	public boolean sosMesa(int valor1)
+	{
+		if(valor1==nroMesa)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean devolverMozo(Mozo m)
+	{
+		if(m == mozo)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+	
+}
