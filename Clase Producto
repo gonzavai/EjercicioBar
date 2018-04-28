@@ -1,0 +1,24 @@
+
+public class Producto {
+	private int cod;
+	private String descripcion;
+	private float precioUnit;
+	
+	
+	public Producto(int valor1,String str1, float valor2)
+	{
+		cod = valor1;
+		descripcion = str1;
+		precioUnit = valor2;
+	}
+	
+	public float calcular(int cant)
+	{
+		return precioUnit * cant;
+	}
+	
+	public float devolverPrecio()
+	{
+		return precioUnit;
+	}
+}
