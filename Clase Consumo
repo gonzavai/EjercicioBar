@@ -1,0 +1,22 @@
+
+public class Consumo {
+	private Producto producto;
+	private int cant;
+	private float importe;
+	
+	public Consumo(Producto prod, int valor1, float valor2)
+	{
+		producto = prod;
+		cant = valor1;
+		importe = this.calcular(cant);
+	}
+	
+	
+	public float calcular(int valor1)
+	{
+		float total;
+		total = (producto.devolverPrecio()*cant);
+		return total;
+	}
+	
+}
