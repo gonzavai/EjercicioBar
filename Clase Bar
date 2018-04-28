@@ -1,0 +1,113 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Bar {
+	private String razonSocial;
+	private int cuit;
+	private ArrayList<Mozo> mozos;
+	private ArrayList<Producto> productos;
+	private ArrayList<Ticket> tickets;
+	private int maxMesas;
+	private int ultimoTicket;
+	
+	
+	public Bar()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.println("Ingrese razon Social: ");
+		razonSocial = entrada.next();
+		System.out.println("Ingrese Cuit: ");
+		cuit = entrada.nextInt();
+		mozos = new ArrayList<Mozo>();
+		productos = new ArrayList<Producto>();
+		tickets = new ArrayList<Ticket>();
+		maxMesas = 30;
+		ultimoTicket = 0;
+	}
+	
+	public void abrirMesa()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.println("Ingrese numero de mesa: ");
+		int nroMesa = entrada.nextInt();
+		
+		if((nroMesa<1) || (nroMesa>maxMesas))
+		{
+			System.out.println("Error. No existe numero de mesa");
+		}
+		else
+		{
+			if(this.buscarUltimoTicket(nroMesa).estaAbierto());
+			{
+				System.out.println("Error. El ticket y la mesa estan abiertas");
+			}
+			
+			     {
+					 Mozo m = this.buscarMozoMenosOcupado();
+					 if(m==null)
+					 {
+						 System.out.println("Error. No hay mozo para asignar");
+					 }
+					 	else
+					 		{
+							 ultimoTicket++;
+							 Ticket t = new Ticket(ultimoTicket,nroMesa,m);
+							 tickets.add(t);
+					 		}
+				}
+		}
+		
+	}
+	
+	public Ticket buscarUltimoTicket (int mesa)
+	{
+		if(tickets.isEmpty())
+			return null;
+			else
+			{
+				int i = tickets.size()-1;
+				while((i>0) && !(tickets.get(i).sosMesa(mesa)))
+				{
+					i--;
+				}
+				if(i>=0)
+				{
+					return tickets.get(i);
+				}
+				else
+					return null;
+			}
+	}
+	
+	public Mozo buscarMozoMenosOcupado()
+	{
+		Mozo rdo=null;
+		if(mozos.isEmpty())
+			return null;
+		else
+		{
+			int cantTickets;
+			int minTickets = tickets.size();
+			
+			for(Mozo m:mozos)
+			{
+				cantTickets=0;
+				for(Ticket t:tickets)
+				{
+					if((t.devolverMozo(m)) && (t.estaAbierto()))
+					{
+						cantTickets++;
+					}
+					if(cantTickets<=minTickets)
+					{
+						minTickets = cantTickets;
+						rdo = m;
+					}
+				}
+			}
+		}
+		return rdo;
+	}
+	
+	
+}
